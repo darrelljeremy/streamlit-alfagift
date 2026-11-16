@@ -1,17 +1,19 @@
 # Dashboard
 streamlit>=1.40
-pandas
-numpy
+pandas>=2.1,<2.3
+numpy==1.26.4
 
-# Linear SVM + TF-IDF (artefak dilatih dengan scikit-learn 1.4.2; app memakai shim kompatibilitas IDF untuk versi baru)
-scikit-learn
+# Linear SVM + TF-IDF: artefak .joblib dilatih dengan scikit-learn 1.4.2,
+# jadi versi dikunci agar model bisa dibuka tanpa error/peringatan.
+# (scikit-learn 1.4.2 butuh numpy < 2 dan scipy lama)
+scikit-learn==1.4.2
+scipy==1.13.1
 joblib
 
-# Transformer (IndoBERT, XLM-RoBERTa, mBERT)
+# Transformer (IndoBERT, XLM-RoBERTa, mBERT); model diunduh dari Hugging Face Hub
 torch
 transformers
+huggingface_hub
 
-# BARU: ekspor Excel (.xlsx) untuk Riwayat Review & Tindak Lanjut
+# Ekspor Excel (.xlsx) untuk Riwayat Review & Tindak Lanjut
 openpyxl
-
-# Catatan: sqlite3 (database tindak lanjut) sudah bawaan Python, tidak perlu dipasang.
