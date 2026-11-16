@@ -1,4 +1,17 @@
+"""Dashboard klasifikasi issue dan severity ulasan Alfagift (Streamlit).
 
+Cara kerja singkat:
+  1. Pengguna memasukkan satu ulasan.
+  2. Tiap model memprediksi kategori issue (bisa lebih dari satu).
+  3. Severity diprediksi untuk setiap kategori yang terprediksi.
+  4. Hasil bisa disimpan ke database untuk tindak lanjut.
+
+Letak file:
+  model/svm_tfidf/   -> file .joblib SVM (butuh severity_percat.py di folder yang sama dengan app.py)
+  model/<transformer>/ -> folder model Transformer (issue dan severity)
+  results/<model>/   -> file hasil eksperimen (summary .json dan prediksi uji .csv)
+Jalankan dengan:  streamlit run app.py
+"""
 from __future__ import annotations
 
 import base64
@@ -90,27 +103,37 @@ def hf_repo_for(model_key: str, task: str) -> str | None:
 
 # pergantian model repos
 # Unduh HANYA config.json (kecil) untuk cek status tanpa mengunduh bobot 1 GB.
-# Mengembalikan (folder_berisi_config, pesan_error).
+# Kegagalan TIDAK di-cache (exception tidak disimpan oleh st.cache_data), jadi setelah repo
+# diperbaiki di Hugging Face, status langsung berubah tanpa menunggu cache habis.
 @st.cache_data(show_spinner=False, ttl=3600)
+def _hf_config_folder_cached(repo: str) -> str:
+    from huggingface_hub import hf_hub_download
+
+    cfg = hf_hub_download(repo_id=repo, filename="config.json")
+    return str(Path(cfg).parent)
+
+
+# Mengembalikan (folder_berisi_config, pesan_error).
 def hf_config_folder(repo: str) -> tuple[str, str]:
     try:
-        from huggingface_hub import hf_hub_download
-
-        cfg = hf_hub_download(repo_id=repo, filename="config.json")
-        return str(Path(cfg).parent), ""
+        return _hf_config_folder_cached(repo), ""
     except Exception as exc:  # noqa: BLE001
         return "", f"Repo Hugging Face `{repo}` tidak bisa diakses: {type(exc).__name__}"
 
 
 # pergantian model repos
-# Ukuran model.safetensors di Hugging Face (tanpa mengunduh).
+# Ukuran model.safetensors di Hugging Face (tanpa mengunduh). Kegagalan tidak di-cache.
 @st.cache_data(show_spinner=False, ttl=3600)
+def _hf_weights_size_cached(repo: str) -> int:
+    from huggingface_hub import HfApi
+
+    info = HfApi().get_paths_info(repo, ["model.safetensors"])
+    return int(info[0].size)
+
+
 def hf_weights_size(repo: str) -> int | None:
     try:
-        from huggingface_hub import HfApi
-
-        info = HfApi().get_paths_info(repo, ["model.safetensors"])
-        return int(info[0].size) if info and info[0].size else None
+        return _hf_weights_size_cached(repo)
     except Exception:  # noqa: BLE001
         return None
 
