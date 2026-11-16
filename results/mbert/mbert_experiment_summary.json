@@ -1,0 +1,71 @@
+{
+  "model_name": "bert-base-multilingual-cased",
+  "task_setup": {
+    "issue": "multi-label, 10 issue classes, evaluated per unique review_id",
+    "severity": "4-class classification per review_id-category pair; input includes category"
+  },
+  "csv_path": "/content/alfagift_issue_labeled_merged.csv",
+  "split_source": "new iterative multilabel split (seed=42)",
+  "max_length": 128,
+  "batch_size": 16,
+  "tuning_fraction": 0.25,
+  "learning_rate_candidates": [
+    1e-05,
+    2e-05,
+    3e-05,
+    5e-05
+  ],
+  "max_epochs": 30,
+  "early_stopping_patience": 2,
+  "early_stopping_metric": "validation_macro_f1",
+  "best_params": {
+    "issue": {
+      "learning_rate": 3e-05,
+      "epochs": 12,
+      "best_epoch": 12,
+      "stopped_epoch": 14,
+      "validation_macro_f1": 0.7096473992367794,
+      "max_epochs": 30,
+      "early_stopping_patience": 2,
+      "tuning_fraction": 0.25
+    },
+    "severity": {
+      "learning_rate": 3e-05,
+      "epochs": 4,
+      "best_epoch": 4,
+      "stopped_epoch": 6,
+      "validation_macro_f1": 0.8733731223116119,
+      "max_epochs": 30,
+      "early_stopping_patience": 2,
+      "tuning_fraction": 0.25
+    }
+  },
+  "test_metrics_issue": {
+    "macro_f1": 0.739335752473189,
+    "micro_f1": 0.8745963401506996,
+    "weighted_f1": 0.8736383839636369,
+    "macro_precision": 0.7410216595265406,
+    "macro_recall": 0.7390060111268946,
+    "hamming_loss": 0.032383599722029185,
+    "subset_accuracy": 0.7553856845031272,
+    "exact_match_errors": 352
+  },
+  "test_metrics_severity": {
+    "macro_f1": 0.9048497114727243,
+    "weighted_f1": 0.9083683518704367,
+    "macro_precision": 0.9134701963601738,
+    "macro_recall": 0.8984750460231885,
+    "accuracy": 0.9088457389428263,
+    "incorrect_predictions": 169
+  },
+  "split_counts_review_level": {
+    "train": 11515,
+    "validation": 1419,
+    "test": 1439
+  },
+  "split_counts_severity_annotations": {
+    "train": 14801,
+    "validation": 1853,
+    "test": 1854
+  }
+}

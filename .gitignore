@@ -1,0 +1,14 @@
+# Model besar -> ada di Hugging Face, jangan masuk GitHub
+model/indobert/
+model/mbert/
+model/xlmroberta/
+
+# Sampah / file lokal
+.ipynb_checkpoints/
+__pycache__/
+*.log
+run_dashboard.ipynb
+app_1.py
+
+# Rahasia
+.streamlit/secrets.toml

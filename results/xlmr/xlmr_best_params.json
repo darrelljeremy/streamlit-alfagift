@@ -1,0 +1,22 @@
+{
+  "issue": {
+    "learning_rate": 5e-05,
+    "epochs": 13,
+    "best_epoch": 13,
+    "stopped_epoch": 15,
+    "validation_macro_f1": 0.7043596975578048,
+    "max_epochs": 30,
+    "early_stopping_patience": 2,
+    "tuning_fraction": 0.25
+  },
+  "severity": {
+    "learning_rate": 1e-05,
+    "epochs": 5,
+    "best_epoch": 5,
+    "stopped_epoch": 7,
+    "validation_macro_f1": 0.8741395281145127,
+    "max_epochs": 30,
+    "early_stopping_patience": 2,
+    "tuning_fraction": 0.25
+  }
+}

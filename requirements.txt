@@ -1,0 +1,17 @@
+# Dashboard
+streamlit>=1.40
+pandas
+numpy
+
+# Linear SVM + TF-IDF (artefak dilatih dengan scikit-learn 1.4.2; app memakai shim kompatibilitas IDF untuk versi baru)
+scikit-learn
+joblib
+
+# Transformer (IndoBERT, XLM-RoBERTa, mBERT)
+torch
+transformers
+
+# BARU: ekspor Excel (.xlsx) untuk Riwayat Review & Tindak Lanjut
+openpyxl
+
+# Catatan: sqlite3 (database tindak lanjut) sudah bawaan Python, tidak perlu dipasang.

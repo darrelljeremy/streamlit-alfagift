@@ -1,0 +1,101 @@
+{
+  "split_file": "review_id_split_transformer.csv",
+  "include_other_in_severity": true,
+  "severity_unit": "per pasangan (review, kategori)",
+  "issue_labels": [
+    "ACCOUNT",
+    "INSTALL_UPDATE",
+    "LOCATION",
+    "ORDER",
+    "OTHER",
+    "PAYMENT",
+    "RECEIPT_NOTIF",
+    "SYSTEM",
+    "UI_FEATURE",
+    "VOUCHER"
+  ],
+  "severity_labels_low_to_high": [
+    "LOW",
+    "MEDIUM",
+    "HIGH",
+    "BLOCKER"
+  ],
+  "split_sizes": {
+    "train": 11515,
+    "test": 1439,
+    "validation": 1419
+  },
+  "split_severity_annotation_counts": {
+    "train": 14801,
+    "test": 1854,
+    "validation": 1853
+  },
+  "issue_best_params": {
+    "C": 0.05,
+    "class_weight": "balanced"
+  },
+  "severity_best_params": {
+    "mode": "augmented",
+    "C": 0.1,
+    "class_weight": "balanced"
+  },
+  "issue_test_metrics": {
+    "macro_F1": 0.7398996686851687,
+    "micro_F1": 0.8467558697298662,
+    "weighted_F1": 0.8564871391613008,
+    "macro_precision": 0.6695652835243983,
+    "macro_recall": 0.8508806590526283,
+    "hamming_loss": 0.042182070882557335,
+    "subset_accuracy": 0.665045170257123
+  },
+  "severity_test_metrics": {
+    "n": 1854.0,
+    "accuracy": 0.8926645091693636,
+    "macro_F1": 0.8979060898155975,
+    "weighted_F1": 0.8920029816603059,
+    "macro_precision": 0.9025011187195464,
+    "macro_recall": 0.8953392670591055
+  },
+  "baseline_majority_per_category_test": {
+    "n": 1854.0,
+    "accuracy": 0.7238403451995685,
+    "macro_F1": 0.7234345101092432,
+    "weighted_F1": 0.723031774966374,
+    "macro_precision": 0.7821044111942386,
+    "macro_recall": 0.6947055640749369
+  },
+  "old_review_level_copied_to_pairs_test": {
+    "n": 1854.0,
+    "accuracy": 0.8306364617044228,
+    "macro_F1": 0.7339618413670845,
+    "weighted_F1": 0.8237940890906419,
+    "macro_precision": 0.7738299830107928,
+    "macro_recall": 0.7189693749786956
+  },
+  "review_level_test": {
+    "old": {
+      "n": 1439.0,
+      "accuracy": 0.8665740097289785,
+      "macro_F1": 0.773238951499579,
+      "weighted_F1": 0.8675970182885876,
+      "macro_precision": 0.7586508453345246,
+      "macro_recall": 0.7968777575891367
+    },
+    "new_true_categories": {
+      "n": 1439.0,
+      "accuracy": 0.8874218207088256,
+      "macro_F1": 0.8867631952510001,
+      "weighted_F1": 0.8865994224097243,
+      "macro_precision": 0.8944822931263365,
+      "macro_recall": 0.8818746783900362
+    },
+    "new_end_to_end": {
+      "n": 1439.0,
+      "accuracy": 0.8359972202918694,
+      "macro_F1": 0.7562627201713682,
+      "weighted_F1": 0.8454630540104466,
+      "macro_precision": 0.7790429881103799,
+      "macro_recall": 0.7385476743982757
+    }
+  }
+}
